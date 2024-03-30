@@ -5,6 +5,8 @@ import java.util.List;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
+import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.XYSeries.XYSeriesRenderStyle;
 
 /**
  * 
@@ -15,12 +17,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	
 	private Node root = null;
 	private int size = 0;
-//	private Map<Long, Integer> map = new HashMap<>();
-//	private int arraySize = 50;
 	private List<Double> timeValues = new ArrayList<>();
 	private List<Double> heightValues = new ArrayList<>();
-	private double[] xData = new double[50];
-	private double[] yData = new double[50];
+	private int arraySize = 50;
+	private double[] xData = new double[arraySize];
+	private double[] yData = new double[arraySize];
 	
 	class Node {
 		T data = null;
@@ -212,8 +213,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	// Plot values ti (x-axis) against hi (y-axis)
 	// Using xchart library
 	public void plotValues() {
-//		xData = timeValues.toArray(xData);
-//		yData = heightValues.toArray(yData);
+		
+		// Transfer time values to double array for Xchart x-axis
 		int index = 0;		
 		System.out.print("\nTime values: ");
 		for(Double element : timeValues) {
@@ -222,6 +223,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 		System.out.println();
 		
+		// Transfer height values to double array for Xchart y-axis
 		index = 0;
 		System.out.print("\nHeight values: ");		
 		for(Double element : heightValues) {
@@ -230,46 +232,15 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
 		}
 	
-//		double[] xData = new double[arraySize];
-//		double[] yData = Arrays.stream(ints).asDoubleStream().toArray();;
-		
-
-		
-//		Object[] xPoints = map.keySet().toArray();
-//		Object[] yPoints = map.values().toArray();
-//		
-//		double[] xData = Arrays.stream(xPoints).asDoubleStream().toArray();;
-//		double[] yData = Arrays.stream(ints).asDoubleStream().toArray();;
-		
-//		Set<Long> timePoints = map.keySet();
-//		
-//		Long[] xPoints = timePoints.toArray(new Long[timePoints.size()]);
-//		double[] xData = new double[timePoints.size()];
-//		
-//		int index = 0;
-//		for(Long element : timePoints) {
-//			xData[index++] = element.doubleValue(); 
-//		}
-//		
-//
-//		Collection<Integer> heightPoints = map.values();
-//		
-//		Integer[] yPoints = heightPoints.toArray(new Integer[timePoints.size()]);
-//		double[] yData = new double[heightPoints.size()];
-//		
-//		index = 0;
-//		for(Integer element : heightPoints) {
-//			yData[index++] = element.doubleValue(); 
-//		}
-		
-//		for(int i = 0; i < map.size(); i++) {
-//		for(Map.Entry<Long, Integer> entry : map.entrySet()) {
-//			xData[i] = map.get(yData)
-//		}
-//	
 		// Create Chart
-		XYChart chart = QuickChart.getChart("Time vs Height", "X-axis: Time (ns)", "Y-axis: Height (# of nodes)", "y(x)", xData, yData);
+//		XYChart chart = QuickChart.getChart("Time vs Height", "X-axis: Time (ns)", "Y-axis: Height (# of nodes)", "y(x)", xData, yData);
 	
+		XYChart chart = new XYChartBuilder().width(600).height(500).title("Time vs Height").xAxisTitle("X-axis: Time (ns)").yAxisTitle("Y-axis: Height (# of nodes)").build();
+		
+		chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
+		
+		chart.addSeries("Coordinates", xData, yData);
+		
 		// Show it
 		new SwingWrapper<XYChart>(chart).displayChart();
 		
