@@ -2,6 +2,10 @@ package bst;
 
 import java.util.Random;
 
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+
 public class Main {
 	
 	public static int generateRand(int maximum) {
@@ -40,12 +44,12 @@ public class Main {
 			// Measure time ti needed for insertion procedure
 			// Store values (hi, ti) into data structure (array or dictionary)
 		while(bst.getSize() < newSize) {
-			bst.insert(generateRand(300));
+			bst.insert2(generateRand(300));
 		}
 		System.out.println();
 		
 		// Plot values ti (x-axis) against hi (y-axis)
-			// Using xchart library
+		bst.plotValues();
 		
 		// Create PDF showing plot graph and big-oh analysis for inserting an element in BST
 	}

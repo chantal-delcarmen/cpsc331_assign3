@@ -1,11 +1,27 @@
 package bst;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+
 /**
  * 
  * Code reused and modified from tutorial notes 
  */
 
 public class BinarySearchTree<T extends Comparable<T>> {
+	
+	private Node root = null;
+	private int size = 0;
+//	private Map<Long, Integer> map = new HashMap<>();
+//	private int arraySize = 50;
+	private List<Double> timeValues = new ArrayList<>();
+	private List<Double> heightValues = new ArrayList<>();
+	private double[] xData = new double[50];
+	private double[] yData = new double[50];
+	
 	class Node {
 		T data = null;
 		Node left = null;
@@ -16,8 +32,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		}
 	}
 	
-	private Node root = null;
-	private int size = 0;
 	
 	public void setRoot(Node node) {
 		this.root = node;
@@ -145,28 +159,122 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	public void insert2(T number) {
 		if(!contains(number)) {
 			// Find height of the tree
-			int height = findHeight();
+			double height = findHeight(root);
+			
+			// Add to the ArrayList of heights
+			heightValues.add(height); 
+//			System.out.println("\nHeight added: " + height);
 			
 			// Insert ri into tree T1	
 			// Measure time needed for insertion process	
-			long beforeAdd = System.currentTimeMillis();
+			double startTime = System.nanoTime();
 			add(number);	
-			long afterAdd = System.currentTimeMillis();
-			long time = afterAdd - beforeAdd;
+			double endTime = System.nanoTime();
+			double runTime = (endTime - startTime);
+			
+			// Add runtime value to the ArrayList of times
+			timeValues.add(runTime);
+//			System.out.println("Runtime added: " + runTime);
+			
 			size++;
 			System.out.print("\n" + number + " added | Size: " + getSize());
+//			System.out.printf("\nInsertion time: %08d ns", runTime);
 
-			// Store values (hi, ti) in data structure   
+			// Store values (ti, hi) in data structure
+//			map.put(runTime, height);
+			
 			
 		} else {
 			System.out.print("\n" + number + " already exists in tree, not added | Size: " + getSize());
 		}
 	}
 
-	private int findHeight() {
-		return ;
-		// TODO Auto-generated method stub
+	private int findHeight(Node node) {
+		int leftHeight = 0;
+		int rightHeight = 0;
+		int height = 0;
 		
+		if(node == null) {
+			height = 0;
+		} else {
+			leftHeight = findHeight(node.left);
+			rightHeight = findHeight(node.right);
+			
+			if(leftHeight > rightHeight) {
+				height = leftHeight + 1;
+			} else {
+				height = rightHeight + 1;
+			}
+		}
+		return height;
+	}
+
+	// Plot values ti (x-axis) against hi (y-axis)
+	// Using xchart library
+	public void plotValues() {
+//		xData = timeValues.toArray(xData);
+//		yData = heightValues.toArray(yData);
+		int index = 0;		
+		System.out.print("\nTime values: ");
+		for(Double element : timeValues) {
+			xData[index] = element.doubleValue();
+			System.out.print(element + " ");
+		}
+		System.out.println();
+		
+		index = 0;
+		System.out.print("\nHeight values: ");		
+		for(Double element : heightValues) {
+			yData[index++] = element.doubleValue();
+			System.out.print(element + " ");
+
+		}
+	
+//		double[] xData = new double[arraySize];
+//		double[] yData = Arrays.stream(ints).asDoubleStream().toArray();;
+		
+
+		
+//		Object[] xPoints = map.keySet().toArray();
+//		Object[] yPoints = map.values().toArray();
+//		
+//		double[] xData = Arrays.stream(xPoints).asDoubleStream().toArray();;
+//		double[] yData = Arrays.stream(ints).asDoubleStream().toArray();;
+		
+//		Set<Long> timePoints = map.keySet();
+//		
+//		Long[] xPoints = timePoints.toArray(new Long[timePoints.size()]);
+//		double[] xData = new double[timePoints.size()];
+//		
+//		int index = 0;
+//		for(Long element : timePoints) {
+//			xData[index++] = element.doubleValue(); 
+//		}
+//		
+//
+//		Collection<Integer> heightPoints = map.values();
+//		
+//		Integer[] yPoints = heightPoints.toArray(new Integer[timePoints.size()]);
+//		double[] yData = new double[heightPoints.size()];
+//		
+//		index = 0;
+//		for(Integer element : heightPoints) {
+//			yData[index++] = element.doubleValue(); 
+//		}
+		
+//		for(int i = 0; i < map.size(); i++) {
+//		for(Map.Entry<Long, Integer> entry : map.entrySet()) {
+//			xData[i] = map.get(yData)
+//		}
+//	
+		// Create Chart
+		XYChart chart = QuickChart.getChart("Time vs Height", "X-axis: Time (ns)", "Y-axis: Height (# of nodes)", "y(x)", xData, yData);
+	
+		// Show it
+		new SwingWrapper<XYChart>(chart).displayChart();
+		
+	//	BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG);
+				
 	}
 }
 
