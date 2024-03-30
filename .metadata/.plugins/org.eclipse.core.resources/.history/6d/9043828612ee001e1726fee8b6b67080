@@ -1,0 +1,34 @@
+package bst;
+
+class Node {
+	int value = 0;
+	Node left = null;
+	Node right = null;
+	
+	public Node(int value) {
+		this.value = value;
+	}
+}
+
+public class BinarySearchTree {
+	
+
+	// Check if it exists in tree
+	// If does not exist already in tree, 
+		// Insert node
+	public contains(int number) {
+		if
+	}
+	
+	// Remove odd value nodes from tree
+	
+	// Insert k = 50 new random integers 
+	// Check if exists in tree
+	// If not in tree, repeat the following
+	
+		// Find height of the tree
+	
+		// Measure time needed for insertion process
+	
+		// Store values (hi, ti) in data structure
+}

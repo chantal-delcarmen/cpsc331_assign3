@@ -1,0 +1,24 @@
+package hashtable;
+
+import java.util.LinkedList;
+
+public class HashTable {
+	private LinkedList<Student> studentList = new LinkedList<>();
+
+	// Search function
+	// Checks whether student is in database
+	
+	// Retrieve function
+	// Return corresponding name
+	
+	// Insert function
+	// Insert/update student's info in database
+	
+	// Delete function
+	// Remove student from database
+	
+	// ToString function
+	// Print the whole database
+	
+	// Hash function
+}

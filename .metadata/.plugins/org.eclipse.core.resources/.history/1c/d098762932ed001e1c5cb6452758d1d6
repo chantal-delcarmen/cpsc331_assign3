@@ -1,0 +1,10 @@
+package hashtable;
+
+import java.util.LinkedList;
+
+public class Student {
+	private String name = "";
+	private int studentID = 0;
+	private LinkedList<Student> list = new LinkedList<>();
+	
+}

@@ -1,0 +1,15 @@
+package bst;
+
+public class BinarySearchTree {
+
+	
+	// Insert node if does not exist already in tree
+	
+	// Remove odd value nodes from tree
+	
+	// Find height of the tree
+	
+	// Measure time needed for insertion process
+	
+	// Store values (hi, ti) in data structure
+}

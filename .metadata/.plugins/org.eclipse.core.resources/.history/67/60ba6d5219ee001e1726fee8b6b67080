@@ -1,0 +1,43 @@
+package bst;
+
+class Node {
+	int value = 0;
+	Node left = null;
+	Node right = null;
+	
+	public Node(int value) {
+		this.value = value;
+	}
+}
+
+public class BinarySearchTree {
+	Node root = null;
+	
+
+	// Check if it exists in tree
+	// If does not exist already in tree, 
+		// Insert node
+	public Node search(Node root, int key) {
+		if(root == null || root.value == key) {
+			return root;
+		}
+		
+		if (root.value < key) {
+			return search(root.right, key);
+		}
+		
+		return search(root.left, key);
+	}
+	
+	// Remove odd value nodes from tree
+	
+	// Insert k = 50 new random integers 
+	// Check if exists in tree
+	// If not in tree, repeat the following
+	
+		// Find height of the tree
+	
+		// Measure time needed for insertion process
+	
+		// Store values (hi, ti) in data structure
+}

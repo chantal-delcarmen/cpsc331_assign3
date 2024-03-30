@@ -1,0 +1,8 @@
+package bst;
+
+import java.util.Random;
+
+public class Main {
+	Random rand = new Random();
+	
+}
