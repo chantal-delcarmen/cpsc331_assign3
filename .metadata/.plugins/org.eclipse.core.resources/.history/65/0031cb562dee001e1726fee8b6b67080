@@ -141,71 +141,19 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
 	
 	// Insert k = 50 new random integers 
-	// 		- Check if exists in tree 
+	// Check if exists in tree
+	// If not in tree, repeat the following:	
+		// Find height of the tree
+		// Insert ri into tree T1	
+		// Measure time needed for insertion process	
+		// Store values (hi, ti) in data structure    
 	public void insert2(T number) {
 		if(!contains(number)) {
-			// Find height of the tree
-			int height = findHeight();
-			
-			// Insert ri into tree T1	
-			// Measure time needed for insertion process	
-			long beforeAdd = System.currentTimeMillis();
 			add(number);	
-			long afterAdd = System.currentTimeMillis();
-			long time = afterAdd - beforeAdd;
 			size++;
 			System.out.print("\n" + number + " added | Size: " + getSize());
-
-			// Store values (hi, ti) in data structure   
-			
 		} else {
 			System.out.print("\n" + number + " already exists in tree, not added | Size: " + getSize());
 		}
 	}
-
-	private int findHeight() {
-		return ;
-		// TODO Auto-generated method stub
-		
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -141,7 +141,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
 	
 	// Insert k = 50 new random integers 
-	// 		- Check if exists in tree 
+	// Check if exists in tree
+	// If not in tree, repeat the following:	
+ 
 	public void insert2(T number) {
 		if(!contains(number)) {
 			// Find height of the tree
