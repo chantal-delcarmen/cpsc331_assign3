@@ -32,17 +32,18 @@ public class Main {
 		int newSize = bst.getSize() + k;
 		System.out.println("\nBST size with " + k + " new integers added = " + newSize);
 		
-		// Generate ri random number
-		
-		// If ri is not in T1
-			// Find height hi of tree T1
-			// Insert ri into tree T1
-			// Measure time ti needed for insertion procedure
-			// Store values (hi, ti) into data structure (array or dictionary)
 		while(bst.getSize() < newSize) {
 			bst.insert(generateRand(300));
 		}
 		System.out.println();
+		
+			// Generate ri random number
+		
+			// If ri is not in T1
+				// Find height hi of tree T1
+				// Insert ri into tree T1
+				// Measure time ti needed for insertion procedure
+				// Store values (hi, ti) into data structure (array or dictionary)
 		
 		// Plot values ti (x-axis) against hi (y-axis)
 			// Using xchart library
