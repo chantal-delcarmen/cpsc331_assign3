@@ -1,7 +1,15 @@
 package hashtable;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+
 public class SchoolDatabase {
-	private StudentList sl = new StudentList();
+//	private StudentList sl = new StudentList();
+	private Map<Integer, String> hashtable = new HashMap<Integer, String>();
 
 	
 	//	2. Search(int ID)
@@ -10,9 +18,15 @@ public class SchoolDatabase {
 	//	then return true
 	// Otherwise return false
 	// -- Checks whether student is in database
-	public boolean search(int iD) {
-		if(sl.contains)
-		return false;
+	public boolean search(int ID) {
+//		boolean result = false;
+//		Set<Integer> ids = hashtable.keySet();
+//		
+//		for(Integer idNum : ids) {
+//			if()
+//		}
+//		return result;
+		return hashtable.containsKey(ID);
 	}
 	
 	//	3. Retrieve(int ID)
@@ -21,6 +35,17 @@ public class SchoolDatabase {
 	//	name. Otherwise, print a message indicating that no student with this ID
 	//	was found in the hash table.
 	// -- Return corresponding name
+	public String retrieve(int ID) {
+		String name = "";
+//		Set<Integer> IDs = new HashSet<Integer>();
+		
+		for(Entry<Integer, String> entry : hashtable.entrySet()) {
+			if(Objects.equals(ID, entry.getKey())) {
+				name = entry.getValue();
+			}
+		}
+		return name;
+	}
 
 	//	4. Insert(int ID, String name)
 	//	Precondition: ID is an integer and name is a string composed of alphanumeric characters
@@ -31,15 +56,15 @@ public class SchoolDatabase {
 	// -- Insert/update student's info in database
 	
 	public void insert(int ID, String name) {
-		Student student = new Student(ID, name);
+//		Student student = new Student(ID, name);
 		
 		if(!search(ID)) {
 			// ID is not in the hashtable
 			// Add student to hashtable
-			sl.addStudent(student);
+			hashtable.put(ID, name);
 		} else { // Else ID is in the hashtable
 			// Update student name to inputted name
-			// TODO
+			hashtable.replace(ID, name);
 		}
 	}
 

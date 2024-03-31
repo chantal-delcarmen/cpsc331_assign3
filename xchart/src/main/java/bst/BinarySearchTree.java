@@ -196,6 +196,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		int height = 0;
 		
 		if(node == null) {
+			// Doesn't change height
 			height = 0;
 		} else {
 			leftHeight = findHeight(node.left);
