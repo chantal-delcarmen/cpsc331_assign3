@@ -39,7 +39,7 @@ public class Main {
 		ht.insert(30100230, "Cathy");		
 		ht.insert(20200156, "Ali");
 		
-		ht.toString();
+		System.out.println(ht.toString());
 		
 	}
 

@@ -39,15 +39,14 @@ public class HashTable {
 			Student newStudent = new Student(ID, name);
 			list.add(newStudent);
 			hashTable[index] = list;
-			System.out.println("At index " + index + " - " + newStudent.getStudentID() + ":" + newStudent.getName() + " added");
+//			System.out.println("At index " + index + " - " + newStudent.getStudentID() + ":" + newStudent.getName() + " added");
 		} else if(!search(ID)) {
 			// If list is not empty and hash table does not contain Student,
 			// add student to list and position at the index in hash table
 			Student newStudent = new Student(ID, name);
 			list.add(newStudent);
 			hashTable[index] = list;
-			System.out.println("At index " + index + " - " + newStudent.getStudentID() + ":" + newStudent.getName() + " added");
-
+//			System.out.println("At index " + index + " - " + newStudent.getStudentID() + ":" + newStudent.getName() + " added");
 		} else { 
 			// Else, student is already in the hash table
 			// Update name to inputed name
@@ -115,7 +114,7 @@ public class HashTable {
 	//	Postcondition: ID modulo LEN is returned.
 	public int hashValue(int ID) {
 		int hashVal = ID % LEN;
-		System.out.println("Hashvalue: " + hashVal);
+//		System.out.println("Hashvalue: " + hashVal);
 		return hashVal;
 	}
 	
@@ -157,19 +156,23 @@ public class HashTable {
 	//	7: [ ]
 	// -- Print the whole database
 	public String toString() {
-		String str = "";
+		StringBuilder str = new StringBuilder();
 		int index = 0;
 		
 		for(LinkedList<Student> list : hashTable) {
 			if(isEmpty(list)) {
-				str += "[ ]";
+				str.append(index + ": [ ");				
 			} else {
+				str.append(index + ": [");				
 				for(Student s : list) {
-					str += index + ": [" + s.getStudentID() + ":" + s.getName() + "]\n";
+					str.append(s.getStudentID() + ":" + s.getName() + ", ");
 				}
+				str.setLength(str.length() - 2);
 			}
+			str.append("]\n");
+			index++;
 		}
-		return str;
+		return str.toString();
 	}	
 	
 }
