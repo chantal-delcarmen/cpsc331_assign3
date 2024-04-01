@@ -8,6 +8,13 @@ import org.knowm.xchart.XYChart;
 
 public class Main {
 	
+	/**
+	 * Method that generates a random number between 0 and the number 
+	 * passed in as maximum
+	 * 
+	 * @param maximum
+	 * @return randomNum
+	 */
 	public static int generateRand(int maximum) {
 		Random rand = new Random();
 		int min = 0;

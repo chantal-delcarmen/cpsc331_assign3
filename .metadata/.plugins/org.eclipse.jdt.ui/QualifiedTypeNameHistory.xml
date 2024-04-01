@@ -3,18 +3,21 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="bst.Main"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.XYChart"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.QuickChart"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.SwingWrapper"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.BitmapEncoder"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.BitmapEncoder.BitmapFormat"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="java.util.Objects"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.XYChartBuilder"/>
     <fullyQualifiedTypeName name="org.knowm.xchart.XYSeries.XYSeriesRenderStyle"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="java.security.KeyStore.Entry"/>
+    <fullyQualifiedTypeName name="java.util.Map.Entry"/>
+    <fullyQualifiedTypeName name="java.util.Objects"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
 </qualifiedTypeNameHistroy>
