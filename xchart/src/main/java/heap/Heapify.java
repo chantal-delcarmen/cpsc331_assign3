@@ -3,6 +3,7 @@ package heap;
 public class Heapify {
 	private int[] heap = new int[1000];
 	private int size = 0;
+	private int swapCounter = 0;
 	
 	public boolean isEmpty() {
 		return (size == 0);

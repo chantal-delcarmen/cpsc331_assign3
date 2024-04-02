@@ -1,7 +1,11 @@
 package bst;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.knowm.xchart.BitmapEncoder;
+import org.knowm.xchart.BitmapEncoder.BitmapFormat;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
@@ -171,7 +175,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 			double startTime = System.nanoTime();
 			add(number);	
 			double endTime = System.nanoTime();
-			double runTime = (endTime - startTime);
+			double runTime = (endTime - startTime)/1000;
 			
 			// Add runtime value to the ArrayList of times
 			timeValues.add(runTime);
@@ -219,7 +223,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		int index = 0;		
 		System.out.print("\nTime values: ");
 		for(Double element : timeValues) {
-			xData[index] = element.doubleValue();
+			xData[index++] = element.doubleValue();
 			System.out.print(element + " ");
 		}
 		System.out.println();
@@ -236,7 +240,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		// Create Chart
 //		XYChart chart = QuickChart.getChart("Time vs Height", "X-axis: Time (ns)", "Y-axis: Height (# of nodes)", "y(x)", xData, yData);
 	
-		XYChart chart = new XYChartBuilder().width(600).height(500).title("Time vs Height").xAxisTitle("X-axis: Time (ns)").yAxisTitle("Y-axis: Height (# of nodes)").build();
+		XYChart chart = new XYChartBuilder().width(600).height(500).title("Time vs Height").xAxisTitle("X-axis: Time (ps)").yAxisTitle("Y-axis: Height (# of nodes)").build();
 		
 		chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
 		
@@ -245,7 +249,12 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		// Show it
 		new SwingWrapper<XYChart>(chart).displayChart();
 		
-	//	BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG);
+		try {
+			BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapFormat.PNG);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 	}
 }
