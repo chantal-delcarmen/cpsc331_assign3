@@ -67,10 +67,15 @@ public class Main {
 		// -----------------------------------------------------------------
 		// ONE-BY-ONE 
 		
+		System.out.println("ONE BY ONE\n");
+
 		// Reset swap counter again
 		swapCounter = 0; 
+		size = 0;
 		
-		for(int i=0; i < sortedOneByoneHeap.length; i++) {
+//		System.out.println("SORTED ONE BY ONE\n");
+
+		for(int i = 0; i < maxSize; i++) {
 			insert(sortedOneByoneHeap, i);
 		}
 		
@@ -78,15 +83,17 @@ public class Main {
 		
 		// Reset swap counter again
 		swapCounter = 0;
+		size = 0;
 		
-		for(int i=0; i < randomOneByoneHeap.length; i++) {
+//		System.out.println("RANDOM ONE BY ONE\n");
+
+		for(int i = 0; i < maxSize; i++) {
 			insert(randomOneByoneHeap, rand.nextInt(1000));
 		}
 		
 		randomOneByOneSwapCounter = swapCounter;
 		
 		// Output
-		System.out.println("ONE BY ONE");
 
 		System.out.println("INPUT: A random array with a size of 1000");
 		System.out.println(randomOneByOneSwapCounter + "\n");
@@ -114,19 +121,24 @@ public class Main {
 //            swap(current, parent(current));
 //            current = parent(current);
 //        }
+//		System.out.print(size + "/" + maxSize + " | ");
+		
         if (size >= maxSize) {
+        	System.out.println("Heap is full!");
             return; // Heap is full
         }
-        heap[++size] = data;
+        
+        heap[size] = data;
         int current = size;
+        
+
 
         // Move the new element up to maintain the heap property
         while (heap[current] > heap[parent(current)]) {
             swap(heap, current, parent(current));
             current = parent(current);
-        }
-        
-		size++;		
+        }	
+        size++;
 	}
 
 	private static int[] buildHeap(int[] array, int length) {
