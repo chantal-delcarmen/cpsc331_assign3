@@ -2,6 +2,10 @@ package heap;
 
 import java.util.Random;
 
+/**
+ * Some code copied and modified from lecture / tutorial notes
+ */
+
 public class Main {
 	private static int maxSize = 1000;	 
 	private static int swapCounter = 0;	
@@ -138,52 +142,75 @@ public class Main {
 		return array;
 	}
 	
+
+	private static void heapSort(int[] heap) {
+		int[] sortedArray = new int[heap.length];
+		
+		for(int i = (heap.length - 1); i >= 0; i--) {
+			sortedArray[i] = remove(heap, 0, i);
+		}
+	}
+
+	private static int remove(int[] heap, int root, int current) {
+		int value = heap[root];
+		heap[root] = heap[current];		
+		heapify(heap, current, root);
+		return value;
+	}
+	
 	public static void main(String[] args) {
 		
 		// -----------------------------------------------------------------
-		// HEAPIFY 
+		// BUILDING HEAPIFY HEAPS AND CALCULATING SWAPS 
 		
-		// Create / populate sorted array
+		// Build heap for sorted heapify heap
 		sortedArray = getSortedArray(sortedArray.length);
-
-		// Create / populate random array
-		randomArray = getRandomArray(randomArray.length);
-		
-		// Build heap for sorted array
 		sortedHeapifyHeap = buildHeap(sortedArray, sortedArray.length);
 		sortedHeapifySwapCounter = swapCounter;
+
 		
-		// Build heap for random array
+		// Build heap for random heapify heap
+		randomArray = getRandomArray(randomArray.length);
 		randomHeapifyHeap = buildHeap(randomArray, randomArray.length);
 		randomHeapifySwapCounter = swapCounter;
 		
-		// Output
-		System.out.println("HEAPIFY");
-		
-		System.out.println("INPUT: A random array with a size of 1000");
-		System.out.println(randomHeapifySwapCounter + "\n");
-		
-		System.out.println("INPUT: A sorted array with a size of 1000");
-		System.out.println(sortedHeapifySwapCounter + "\n");
-		
 		// -----------------------------------------------------------------
-		// ONE-BY-ONE 
-		
-		System.out.println("ONE BY ONE\n");
+		// BUILDING ONE-BY-ONE HEAPS AND CALCULATING SWAPS 
 
+		// Build heap for sorted one by one heap
 		sortedOneByOneHeap = buildSortedOneByOne();
 		sortedOneByOneSwapCounter = swapCounter;
 		
+		// Build heap for random one by one heap
 		randomOneByOneHeap = buildRandomOneByOne();
 		randomOneByOneSwapCounter = swapCounter;
 		
-		// Output
-
-		System.out.println("INPUT: A random array with a size of 1000");
-		System.out.println(randomOneByOneSwapCounter + "\n");
+		// -----------------------------------------------------------------
+		// HEAP SORTING RANDOM HEAPS AND CALCULATING TOTAL SWAPS 
 		
-		System.out.println("INPUT: A sorted array with a size of 1000");
-		System.out.println(sortedOneByOneSwapCounter + "\n");
+		// Random Heapify Heap
+		swapCounter = 0;
+		heapSort(randomHeapifyHeap);
+		int heapifySwapSum = randomHeapifySwapCounter + swapCounter;
+
+		// Random One by One Heap
+		swapCounter = 0;
+		heapSort(randomOneByOneHeap);
+		int onebyoneSwapSum = randomOneByOneSwapCounter + swapCounter;
+		
+		// -----------------------------------------------------------------
+		// OUTPUT
+		
+		// Part 1, Section B
+		System.out.println("\nPart 1, Section B -  Sorted");
+		System.out.println("1. Heapify Swap Counter: " + sortedHeapifySwapCounter);
+		System.out.println("2. OneByOne Swap Counter: " + sortedOneByOneSwapCounter);
+
+		// Part 2, Section B
+		System.out.println("\nPart 2, Section B - Random -> HeapSort");
+		System.out.println("1. Heapify Swap Counter: " + heapifySwapSum);
+		System.out.println("2. OneByOne Swap Counter: " + onebyoneSwapSum);
+
 		
 	} // End main method
 
