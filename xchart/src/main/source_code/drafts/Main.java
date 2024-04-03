@@ -1,4 +1,4 @@
-package graph;
+package drafts;
 
 import java.util.Scanner;
 

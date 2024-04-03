@@ -1,23 +1,12 @@
-package graph;
-
-public class Draft {
-
-}
-
-
-
-Sure, I can provide a more streamlined implementation of the Graph class using modern Java features and some improvements. Here's the revised code:
-
-java
-Copy code
+package drafts;
 
 import java.util.*;
 
-class Graph {
+class Graph_ {
     private int vertices;
     private List<Edge>[] adjList;
 
-    Graph(int vertices) {
+    Graph_(int vertices) {
         this.vertices = vertices;
         adjList = new ArrayList[vertices];
         for (int i = 0; i < vertices; i++) {
@@ -89,10 +78,12 @@ class Graph {
         }
     }
 }
-Improvements and changes made:
+/*
+ * Improvements and changes made:
 
 Changed the adjList to be an array of ArrayList instead of LinkedList for better performance in most cases.
 Utilized PriorityQueue and a custom Node class for implementing Dijkstra's algorithm. This approach simplifies the code and improves readability.
 Replaced the array-based approach for tracking distances and visited vertices with ArrayList and PriorityQueue.
 Used a more efficient method reconstructPath() to reconstruct the shortest path from the parent array.
 This implementation should provide better performance and readability while retaining the functionality of the original code.
+ */

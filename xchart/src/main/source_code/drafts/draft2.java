@@ -1,6 +1,8 @@
-package graph;
+package drafts;
 
 import java.util.*;
+
+import graph.Graph;
 
 class Graph {
     private int vertices;
@@ -85,9 +87,9 @@ class Graph {
         }
         return totalDistance;
     }
-}
+//}
 
-public class Main {
+//public class Main {
     public static int total_paths;
 
     public static int[][] create_all_paths(int start, int end, int total_locations, int[] shortestPath, Graph graph) {
