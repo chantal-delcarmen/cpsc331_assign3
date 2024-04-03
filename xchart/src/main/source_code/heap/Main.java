@@ -7,6 +7,7 @@ import java.util.Random;
  */
 
 public class Main {
+	// Declare and initialize variables
 	private static int maxSize = 1000;	 
 	private static int swapCounter = 0;	
 	private static int sortedHeapifySwapCounter = 0;
@@ -25,6 +26,7 @@ public class Main {
     // Returns the index of the parent for the node at index pos
     private static int parent(int pos) {return pos / 2; }
 
+    // Generate random array
 	private static int[] getRandomArray(int length) {
 		int[] array = new int[length];
 		
@@ -34,6 +36,7 @@ public class Main {
 		return array;
 	}
 
+    // Generate sorted array
 	private static int[] getSortedArray(int length) {
 		int[] array = new int[length];
 		
@@ -44,27 +47,35 @@ public class Main {
 		return array;
 	}
 	
+	// Builds a max heap given an array and length of the array
 	private static int[] buildHeap(int[] array, int length) {
 		swapCounter = 0;
 
+		// Calculate start
 		int start = (length/2) - 1;
 		
+		// Starting at the start node, heapify each node, going from the top down
 		for(int i = start; i >=0; i--) {
 			heapify(array, length, i);
 		}
         return array;
 	}
 
+	// Heapify method which takes an array, length and current node
 	private static int[] heapify(int[] array, int length, int current) {
-		
+		// Declare and caculate node, left and right
 		int node = current;
 		int left = ((2 * current) + 1);
 		int right = ((2 * current) + 2);
 		
+		// If left position < length of array AND value of left > current value,
+		// make left equal to node
 		if(left < length && array[left] > array[node]) {
 			node = left;
 		}
 		
+		// If right position < length AND value of right > current value,
+		// make right equivalent to node
 		if(right < length && array[right] > array[node]) {
 			node = right;
 		}
@@ -77,21 +88,24 @@ public class Main {
         return array;
 	}
 	
+	// Swaps locations of two given values in the heap
 	private static void swap(int[] heap, int location, int parent) {
 		int temp;
 		temp = heap[location];
 		heap[location] = heap[parent];
 		heap[parent] = temp;		
-		swapCounter++;
+		swapCounter++; // Increment swap counter
 	}
 	
+	// Method to insert a value into a given heap
 	private static void insert(int[] heap, int data) {
-		
+		// If size is greater or equal to maxSize, then heap is full
         if (size >= maxSize) {
         	System.out.println("Heap is full!");
             return; // Heap is full
         }
         
+        // Put data value in the heap
         heap[size] = data;
         int current = size;
         
@@ -100,10 +114,10 @@ public class Main {
             swap(heap, current, parent(current));
             current = parent(current);
         }	
-        size++;
+        size++; // Increment size
 	}
 	
-
+	// Build a randomized one by one heap
 	private static int[] buildRandomOneByOne() {
 		// Reset swap counter again
 		swapCounter = 0;
@@ -118,6 +132,7 @@ public class Main {
 		return array;
 	}
 
+	// Build a sorted one by one heap
 	private static int[] buildSortedOneByOne() {
 		// Reset swap counter again
 		swapCounter = 0; 
@@ -133,6 +148,7 @@ public class Main {
 	}
 	
 
+	// Sort the heap 
 	private static void heapSort(int[] heap) {
 		int[] sortedArray = new int[heap.length];
 		
@@ -141,6 +157,7 @@ public class Main {
 		}
 	}
 
+	// Remove an element from a heap
 	private static int remove(int[] heap, int root, int current) {
 		int value = heap[root];
 		heap[root] = heap[current];		
