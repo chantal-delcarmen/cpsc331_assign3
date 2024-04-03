@@ -25,16 +25,6 @@ public class Main {
     // Returns the index of the parent for the node at index pos
     private static int parent(int pos) {return pos / 2; }
 
-    // Returns the index of the left child for the node at index pos
-    private static int leftChild(int pos) { return (2 * pos); }
-
-    // Returns the index of the right child for the node at index pos
-    private static int rightChild(int pos) { return (2 * pos) + 1; }
-
-    // Checks if the node at index pos is a leaf node
-    private static boolean isLeaf(int pos) { return pos > (size / 2) && pos <= size; }
-
-
 	private static int[] getRandomArray(int length) {
 		int[] array = new int[length];
 		
