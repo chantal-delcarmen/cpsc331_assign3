@@ -1,5 +1,8 @@
 package hashtable;
 
+/**
+ * Student class
+ */
 public class Student {
 	private String name = "";
 	private int studentID = 0;

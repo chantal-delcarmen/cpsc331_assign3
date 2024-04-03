@@ -1,7 +1,8 @@
 package hashtable;
 
-// Problem 2
-
+/**
+ * Main class for Problem 2, hashtable
+ */
 public class Main {
 	public static void main(String[] args) {
 		HashTable ht = new HashTable();
