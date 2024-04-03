@@ -29,25 +29,64 @@ Denote the central warehouse location as 0 and delivery locations start from 1
 
 public class Graph {
 	private int[][] matrix; 			// Adjacency matrix
-	
-public void setMatrix(int[][] matrix) {
-		this.matrix = matrix;
-	}
-
-	//	private static int numOfVertices = 0;	// Number of vertices
-	private int numOfWarehouses = 6;
+	private int numOfVertices = 0;	// Number of vertices
+	private int numOfWarehouses = 1;	// Always 1
 	private int numOfDeliveryLocs = 0;
 	private int numOfRoads = 0;
 	
-//	public void addEdge(int source, int dest, int weight) {
-//		Edge edge = new Edge(source, dest, weight);
-//		
-//	}
+	public void setMatrix(int[][] matrix) {
+		this.matrix = matrix;
+	}
+
+	public int getNumOfVertices() {
+		return numOfVertices;
+	}
+
+	public void setNumOfVertices(int numOfVertices) {
+		this.numOfVertices = numOfVertices;
+	}
+	
+	public int getNumOfWarehouses() {
+		return numOfWarehouses;
+	}
+
+	public void setNumOfWarehouses(int numOfWarehouses) {
+		this.numOfWarehouses = numOfWarehouses;
+	}
+	
+	public int getNumOfDeliveryLocs() {
+		return numOfDeliveryLocs;
+	}
+
+	public void setNumOfDeliveryLocs(int numOfDeliveryLocs) {
+		this.numOfDeliveryLocs = numOfDeliveryLocs;
+	}
+
+	public int getNumOfRoads() {
+		return numOfRoads;
+	}
+
+	public void setNumOfRoads(int numOfRoads) {
+		this.numOfRoads = numOfRoads;
+	}
+
+	private void addRoad(int start, int dest, int distance) {
+		matrix[start][dest] = distance;
+		System.out.println("Loc " + start + " -> Loc " + dest + " | Distance = " + matrix[start][dest]
+				+ " added to the matrix");
+	}
+	
+
+	private int[][] createMatrix() {
+		setNumOfVertices(getNumOfWarehouses() + getNumOfDeliveryLocs());
+		matrix = new int[getNumOfVertices()][getNumOfVertices()];
+		return matrix;
+	}
 	
 	public int[] dijkstra(int[][] graph, int startWarehouse) {
-		int[] distance = new int[numOfWarehouses];
-		int[] path = new int[numOfWarehouses];
-		boolean[] visited = new boolean[numOfWarehouses];
+		int[] distance = new int[numOfVertices];
+		int[] path = new int[numOfVertices];
+		boolean[] visited = new boolean[numOfVertices];
 		
 		// Initialize and fill the arrays to default values
 		// Max int value for both distance and path values and
@@ -59,99 +98,76 @@ public void setMatrix(int[][] matrix) {
 		// Distance to self is always 0
 		distance[startWarehouse] = 0;
 		
-		int closestWarehouse = 0;
+		int closestLoc = 0;
 		
 		// Finding closest warehouse to current warehouse for each of the warehouses
-		for(int i = 0; i < numOfWarehouses; i++) {
+		for(int i = 0; i < numOfVertices; i++) {
 			// Find closest warehouse
-			closestWarehouse = findClosestWarehouse(distance, visited);
+			closestLoc = findClosestLoc(distance, visited);
 			
 			// Mark closest warehouse as visited
-			visited[closestWarehouse] = true;
+			visited[closestLoc] = true;
 			
-			// Analyzing neighbouring warehouses and updating distance array when new 
+			// Analyzing neighbouring locations and updating distance array when new 
 			// distance is shorter than original distance
-			for(int j = 0; j < numOfWarehouses; j++) {
-				if(matrix[closestWarehouse][j] != 0 && visited[j] == false && distance[closestWarehouse] != Integer.MAX_VALUE) {
-					int newDistance = distance[closestWarehouse] + matrix[closestWarehouse][j];
+			for(int j = 0; j < numOfVertices; j++) {
+				if(matrix[closestLoc][j] != 0 && visited[j] == false && distance[closestLoc] != Integer.MAX_VALUE) {
+					int newDistance = distance[closestLoc] + matrix[closestLoc][j];
 					if(newDistance < distance[j]) {
 						distance[j] = newDistance;
 					}
 				}
 			}
+		}
+			System.out.println("\n");
 			
-			for(int k = 0; k < numOfWarehouses; k++) {
-				System.out.println("Warehouse: " + k + " and Distance from start warehouse: " + distance[k] );
-			}
+		for(int k = 0; k < numOfVertices; k++) {
+			System.out.println("Warehouse: " + k + " and Distance from start warehouse: " + distance[k] );
 		}
 		
 		return null;
 	}
 	
-	private int findClosestWarehouse(int[] distance, boolean[] visited) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+	private int findClosestLoc(int[] distance, boolean[] visited) {
+		int closestVertex = -1;
+		
+		for(int i = 0; i < distance.length; i++) {
+			if(visited[i] == false && (closestVertex == -1 || distance[i] < distance[closestVertex])) {
+				closestVertex = i;
+			}
+		}
+		return closestVertex;
+	}
 
 	public static void main(String[] args) {
-		
-		int adjMat [] [] = {
-		        {0, 2, 0, 4, 0, 0},
-		        {0, 0, 3, 2, 0, 0},
-		        {2, 0, 0, 0, 0, 4},
-		        {0, 0, 0, 0, 2, 0},
-		        {0, 0, 0, 0, 0, 1},
-		        {0, 0, 0, 0, 0, 0}};
-		
-		Graph g = new Graph();
-		g.setMatrix(adjMat);
-		g.dijkstra(adjMat, 0);
 
-		//		// --------------------------------------------------------
-//		// GETTING USER INPUT
-//		// Using Scanner to get input from user
-//		
-//		System.out.println("Please enter input.");
-//		
-//        Scanner in = new Scanner(System.in);
-//
-//        int a = in.nextInt();
-//
-//        int b = in.nextInt();
-//
-//        int c = in.nextInt();
-//        
-//        int d1 = in.nextInt();
-//        int d2 = in.nextInt();
-//        int d3 = in.nextInt();
-//        
-//        int e1 = in.nextInt();
-//        int e2 = in.nextInt();
-//        int e3 = in.nextInt();
-//
-//        int f1 = in.nextInt();
-//        int f2 = in.nextInt();
-//        int f3 = in.nextInt();
-//
-//        int g1 = in.nextInt();
-//        int g2 = in.nextInt();
-//        int g3 = in.nextInt();
-//
-//        int h1 = in.nextInt();
-//        int h2 = in.nextInt();
-//        int h3 = in.nextInt();
-//
-//        System.out.println("You entered:"
-//        		+ "\n" + a
-//        		+ "\n" + b
-//        		+ "\n" + c
-//        		+ "\n" + d1 + ", " + d2 + ", " + d3
-//        		+ "\n" + e1 + ", " + e2 + ", " + e3
-//        		+ "\n" + f1 + ", " + f2 + ", " + f3
-//        		+ "\n" + g1 + ", " + g2 + ", " + g3
-//        		+ "\n" + h1 + ", " + h2 + ", " + h3);
+		// --------------------------------------------------------
+		// GETTING USER INPUT
+		// Using Scanner to get input from user
+		
+		Graph g = new Graph();		
+        Scanner in = new Scanner(System.in);
 
+		System.out.println("Please enter input:");
+
+		// Ask for user input for numOfWarehouses, numOfDeliveryLocs, numOfRoads 
+        g.setNumOfWarehouses(in.nextInt());
+        g.setNumOfDeliveryLocs(in.nextInt());
+        g.setNumOfRoads(in.nextInt());
+        
+        // Create the adjacency matrix from the given user input
+        int[][] adjMatrix = g.createMatrix();
+        System.out.println();
+        
+        // Ask for input for # of roads - start, destination, distance
+        for(int i = 0; i < g.getNumOfRoads(); i++) {
+            g.addRoad(in.nextInt(), in.nextInt(), in.nextInt());
+        }
+        
+        g.dijkstra(adjMatrix, 0);
 	}
+
+
 }
 
 
