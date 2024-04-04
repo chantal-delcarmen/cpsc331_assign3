@@ -1,43 +1,19 @@
 package graph;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 
-/*
-Input
-The input consists of the following lines:
-1 Number of warehouses ( always 1)
-2 Number of delivery locations
-3 Number of roads connecting locations (R)
-4 R lines , each containing three integers : starting location , destination
-location , and distance
-Denote the central warehouse location as 0 and delivery locations start from 1
+
+/**
+ * Code copied and modified from class slides
  */
-
-//class Edge {
-//	private int source = 0;
-//	private int dest = 0;
-//	private int weight = 0;
-//	
-//	public Edge(int source, int dest, int weight) {
-//		this.source = source;
-//		this.dest = dest;
-//		this.weight = weight;
-//	}
-//}
-
 class Result {
 	int[] distArr;
-	int[] pathArr;	
-	List<Integer> shortestPathList;
+	int[] pathArr;
 	
 	public Result(int[] distArr, int[] pathArr) {
 		this.distArr = distArr;
 		this.pathArr = pathArr;
-//		this.shortestPathList = shortestPathList;
 	}
 	
 	public int[] getDistArray() {
@@ -55,10 +31,6 @@ class Result {
 	public void setPathArray(int[] pathArr) {
 		this.pathArr = pathArr;
 	}
-	
-//	public List<Integer> getshortestPathList() {
-//		return shortestPathList;
-//	}
 
 }
 
@@ -70,8 +42,8 @@ public class Graph {
 	private int[][] matrix; // Adjacency matrix
 	private int[] distance = new int[numOfVertices];
 	private int[] path = new int[numOfVertices];
-	private List<Integer> shortestPathList;
 	
+	// Setters and getters of variables
 	public int[] getPath() {
 		return path;
 	}
@@ -129,17 +101,18 @@ public class Graph {
 	}
 	
 
+	// Method to create the adjacency matrix
 	private int[][] createMatrix() {
 		setNumOfVertices(getNumOfWarehouses() + getNumOfDeliveryLocs());
 		matrix = new int[getNumOfVertices()][getNumOfVertices()];
 		return matrix;
 	}
 	
+	// Dijkstras algorithm function
 	public Result dijkstra(int[][] graph, int startWarehouse) {
 		distance = new int[numOfVertices];
 		path = new int[numOfVertices];
-		Result res;
-		
+		Result res;		
 		boolean[] visited = new boolean[numOfVertices];
 		
 		// Initialize and fill the arrays to default values
@@ -177,11 +150,13 @@ public class Graph {
 			}
 		}
 		
+		// Create a Result object to return distance[] and path[]
 		res = new Result(distance, path);
 		return res;		
 	}
 
 
+	// Method to find closest location
 	private int findClosestLoc(int[] distance, boolean[] visited) {
 		int closestVertex = -1;
 		
@@ -193,42 +168,10 @@ public class Graph {
 		return closestVertex;
 	}
 	
+	// Method to print to output
 	private void printOutput(int[] distArray, int[] pathArray) {
-		
-		// Create shortest path list
-		List<Integer> shortestPathList = new ArrayList<Integer>();
-		int start = 0;		
-		int destination = 0;	
-		int current;
-		
-
-		
-//		System.out.println("shortest path:");
-//		for(Integer i : shortestPathList) {
-//			System.out.println(i);
-//		}
-
-		
 		for(int i = 0; i < path.length; i++) {
-			System.out.print("\nDelivery Location " + i); 
-			System.out.print(" - Shortest Route: ");
-			
-			current = i;
-			
-			while (current != start && path[current] != -1) {
-				shortestPathList.add(0, current);
-			    current = path[current];
-			}
-
-			if (current == start) {
-				shortestPathList.add(0, start);	
-			}
-			
-			for(Integer num : shortestPathList) {
-				System.out.print(shortestPathList.get(num));
-				System.out.print(" -> ");
-			}
-			
+			System.out.print("\nDelivery Location " + i + " - Shortest Route: " + pathArray[i]);
 			System.out.print(", Distance: " + distArray[i]);
 
 		}
