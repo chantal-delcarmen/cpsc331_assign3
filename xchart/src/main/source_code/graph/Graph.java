@@ -177,28 +177,6 @@ public class Graph {
 			}
 		}
 		
-//		// Create shortest path list
-//		List<Integer> shortestPathList = new ArrayList<Integer>();
-//		int start = 0;		
-//		int destination = 0;	
-//		int current = destination;
-//		
-//		while (current != start && path[current] != -1) {
-//			shortestPathList.add(0, current);
-//		    current = path[current];
-//		}
-//
-//		if (current == start) {
-//			shortestPathList.add(0, start);	
-//		}
-//		
-//		System.out.println("shortest path:");
-//		for(Integer i : shortestPathList) {
-//			System.out.println(i);
-//		}
-	
-		
-//		res = new Result(distance, path, shortestPathList);
 		res = new Result(distance, path);
 		return res;		
 	}
@@ -213,6 +191,47 @@ public class Graph {
 			}
 		}
 		return closestVertex;
+	}
+	
+	private void printOutput(int[] distArray, int[] pathArray) {
+		
+		// Create shortest path list
+		List<Integer> shortestPathList = new ArrayList<Integer>();
+		int start = 0;		
+		int destination = 0;	
+		int current;
+		
+
+		
+//		System.out.println("shortest path:");
+//		for(Integer i : shortestPathList) {
+//			System.out.println(i);
+//		}
+
+		
+		for(int i = 0; i < path.length; i++) {
+			System.out.print("\nDelivery Location " + i); 
+			System.out.print(" - Shortest Route: ");
+			
+			current = i;
+			
+			while (current != start && path[current] != -1) {
+				shortestPathList.add(0, current);
+			    current = path[current];
+			}
+
+			if (current == start) {
+				shortestPathList.add(0, start);	
+			}
+			
+			for(Integer num : shortestPathList) {
+				System.out.print(shortestPathList.get(num));
+				System.out.print(" -> ");
+			}
+			
+			System.out.print(", Distance: " + distArray[i]);
+
+		}
 	}
 
 	public static void main(String[] args) {
@@ -242,107 +261,13 @@ public class Graph {
         
         Result result = g.dijkstra(adjMatrix, 0);
         
-//        for(int i = 0; i < path.length; i++) {
-//            g.findShortestPaths(result.getPathArray(), i);
-//        }
-//        
         g.printOutput(result.getDistArray(), result.getPathArray());
         
 	} // End main
 
-	private void printOutput(int[] distArray, int[] pathArray) {
-//		for(int i = 0; i < numOfVertices; i++) {
-//			System.out.println("pathArray[i] " + pathArray[i]);
-//		}
-		
-		for(int i = 0; i < path.length; i++) {
-			System.out.print("\nDelivery Location " + i + " - Shortest Route: ");
-			
-//			if (pathArray[i] < 0) {
-//				System.out.print(" No route exists, ");
-//				System.out.print("Distance: Infinity\n\t" + "(Location " + i + " is unreachable from the"
-//					+ " central warehouse)"); 
-//			} else {
-				Stack<Integer> stack = new Stack<>();
-				
-				int test = i;
-				stack.push(test);
-				while (pathArray[test] != 0) {
-					test = pathArray[test];
-					stack.push(test);
-				}
-				stack.push(0);
-			
-				while (!stack.isEmpty()) {
-					if (stack.size() != 1)
-						System.out.print(stack.pop() + " -> ");
-					else System.out.print(stack.pop() + ", ");
-				}
-				System.out.print("Distance: " + distArray[i]);
-			}
-//		}
-	}
 }
 
-//		for(int i = 0; i < numOfVertices; i++) {
-//			System.out.print("\nDelivery Location " + i + " - Shortest Route: ");
-//			
-//			if (pathArray[i] < 0) {
-//				System.out.print(" No route exists, ");
-//				System.out.print("Distance: Infinity\n\t" + "(Location " + i + " is unreachable from the"
-//					+ " central warehouse)"); 
-//			} else {
-//				Stack<Integer> stack = new Stack<>();
-//				
-//				int test = i;
-//				stack.push(test);
-//				while (pathArray[test] != 0) {
-//					test = pathArray[test];
-//					stack.push(test);
-//				}
-//				stack.push(0);
-//			
-//				while (!stack.isEmpty()) {
-//					if (stack.size() != 1)
-//						System.out.print(stack.pop() + " -> ");
-//					else System.out.print(stack.pop() + ", ");
-//				}
-//				System.out.print("Distance: " + distArray[i]);
-//			}
-//		}
 
-//			for(Integer num : shortestPathList) {
-//				System.out.print(shortestPathList.get(num));
-//				System.out.print(" -> ");
-//			}
-			
-//			System.out.print("Distance: " + distArray[i]);
-//		}
-		
-//		for(int j = 0; j < pathArray.length; j++) {
-//			System.out.println("j: " + j + ", pathArray[j]: " + pathArray[j]);
-//		}
-	
-		
-		
-		/*
-		 * // Choose a vertex that is not visited where the distance is the minimum and add it to visited
-                if (
-                    !visited[v] && distances[minIndex] != Integer.MAX_VALUE &&
-                    this.matrix[minIndex][v] != 0 &&
-                    (
-                        distances[minIndex] + this.matrix[minIndex][v] < distances[v] ||
-                        relaxed && distances[minIndex] + this.matrix[minIndex][v] == distances[v]
-                    )
-                )
-                
-                
-				literally just change the "<" to a "<="
-				thats what i mean by "relaxing" the condition
-
-				d[w] + adjacencyMatrix[w][v] < d[v]
-
-		 */
 		
 
 
