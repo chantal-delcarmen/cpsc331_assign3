@@ -72,8 +72,6 @@ public class Graph {
 
 	private void addRoad(int start, int dest, int distance) {
 		matrix[start][dest] = distance;
-		System.out.println("Loc " + start + " -> Loc " + dest + " | Distance = " + matrix[start][dest]
-				+ " added to the matrix");
 	}
 	
 
@@ -119,13 +117,7 @@ public class Graph {
 				}
 			}
 		}
-			System.out.println("\n");
-			
-		for(int k = 0; k < numOfVertices; k++) {
-			System.out.println("Warehouse: " + k + " and Distance from start warehouse: " + distance[k] );
-		}
-		
-		return null;
+		return distance;		
 	}
 	
 	private int findClosestLoc(int[] distance, boolean[] visited) {
@@ -164,7 +156,16 @@ public class Graph {
             g.addRoad(in.nextInt(), in.nextInt(), in.nextInt());
         }
         
-        g.dijkstra(adjMatrix, 0);
+        int[] distArray = g.dijkstra(adjMatrix, 0);
+        
+        g.printOutput(distArray);
+	}
+
+	private void printOutput(int[] distArray) {
+		for(int i = 0; i < numOfVertices; i++) {
+			System.out.println("Delivery Location " + i + " - Shortest Route: " + distArray[i]);
+		}
+		
 	}
 
 
